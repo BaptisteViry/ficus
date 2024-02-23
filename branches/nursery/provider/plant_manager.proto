@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package nursery.provider.plant_manager;
+
+option go_package = "ficus/branches/nursery/provider";
+
+import "nursery/nursery.proto";
+
+message Page {
+  int32 size   = 1;
+  int32 number = 2;
+}
+
+message FetchPlantsRequest {
+  string query = 1;
+  Page   page  = 2;
+}
+
+message FetchPlantsResponse {
+  repeated nursery.Plant plants = 1;
+
+  int32 total = 2;
+}
+
+service PlantManager {
+  rpc FetchPlants(FetchPlantsRequest) returns (FetchPlantsResponse) {}
+}
